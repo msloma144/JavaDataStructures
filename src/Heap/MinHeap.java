@@ -1,14 +1,17 @@
+package Heap;
+
 import java.util.ArrayList;
 
 /**
  * Created by SlomaM on 5/17/2017.
  */
-public class MaxHeap extends Heap{
-    MaxHeap(int initialCapacity){
+public class MinHeap extends Heap{
+
+    MinHeap(int initialCapacity){
         super(initialCapacity);
     }
 
-    MaxHeap(ArrayList<Integer> input){
+    MinHeap(ArrayList<Integer> input){
         super(input);
     }
 
@@ -19,61 +22,61 @@ public class MaxHeap extends Heap{
         return index >= (heap_array.size() / 2) && index <= heap_array.size();
     }
 
-    void maxHeapify(int index){
+    void minHeapify(int index){
         int leftChild = left(index);
         int rightChild = right(index);
-        int largest = 0;
+        int smallest = 0;
 
         //checks to make sure that the index is not a leaf to
         //avoid out of bounds errors
         if(!isLeaf(index)) {
 
-            if ((leftChild < heap_array.size()) && (heap_array.get(leftChild) > heap_array.get(index))) {
-                largest = leftChild;
+            if ((leftChild < heap_array.size()) && (heap_array.get(leftChild) < heap_array.get(index))) {
+                smallest = leftChild;
             } else {
-                largest = index;
+                smallest = index;
             }
 
-            if ((rightChild < heap_array.size()) && (heap_array.get(rightChild) > heap_array.get(largest))) {
-                largest = rightChild;
+            if ((rightChild < heap_array.size()) && (heap_array.get(rightChild) < heap_array.get(smallest))) {
+                smallest = rightChild;
             }
 
-            if (largest != index) {
+            if (smallest != index) {
                 int index_val = heap_array.get(index);
-                heap_array.set(index, heap_array.get(largest));
-                heap_array.set(largest, index_val);
+                heap_array.set(index, heap_array.get(smallest));
+                heap_array.set(smallest, index_val);
 
-                maxHeapify(largest);
+                minHeapify(smallest);
             }
         }
     }
 
-    void maxHeapify(ArrayList<Integer> input_array, int index){
+    void minHeapify(ArrayList<Integer> input_array, int index){
         int leftChild = left(index);
         int rightChild = right(index);
-        int largest = 0;
+        int smallest = 0;
         //works only with ints right now
-        if(leftChild <= input_array.size() && input_array.get(leftChild) > input_array.get(index)){
-            largest = leftChild;
+        if(leftChild <= input_array.size() && input_array.get(leftChild) < input_array.get(index)){
+            smallest = leftChild;
         }
-        else largest = index;
+        else smallest = index;
 
-        if(rightChild <= input_array.size() && input_array.get(rightChild) > input_array.get(largest)){
-            largest = rightChild;
+        if(rightChild <= input_array.size() && input_array.get(rightChild) < input_array.get(smallest)){
+            smallest = rightChild;
         }
 
-        if(largest != index){
+        if(smallest != index){
             int index_val = input_array.get(index);
-            input_array.set(index, input_array.get(largest));
-            input_array.set(largest, index_val);
+            input_array.set(index, input_array.get(smallest));
+            input_array.set(smallest, index_val);
 
-            maxHeapify(largest);
+            minHeapify(smallest);
         }
     }
 
-    void buildMaxHeap(){
+    void buildMinHeap(){
         for(int i = (heap_array.size()/2); i >= 1; i--){
-            maxHeapify(i);
+            minHeapify(i);
         }
     }
 
@@ -83,8 +86,8 @@ public class MaxHeap extends Heap{
         //set currently looked at position to most recently added
         int current = heap_array.size() - 1;
 
-        //while the current node is larger than the parent node...
-        while (heap_array.get(current) > heap_array.get(parent(current))){
+        //while the current node is smaller than the parent node...
+        while (heap_array.get(current) < heap_array.get(parent(current))){
 
             //swap the values
             int index_val = heap_array.get(current);
@@ -96,14 +99,14 @@ public class MaxHeap extends Heap{
         }
     }
 
-    int readMaxElement(){
+    int readMinElement(){
         //swap first and last elements then delete last element
-        int maxElement =  heap_array.get(0);
+        int minElement =  heap_array.get(0);
         heap_array.set(0, heap_array.get(heap_array.size() - 1));
         heap_array.remove(heap_array.size() - 1);
         //re-heapify
-        maxHeapify(0);
+        minHeapify(0);
 
-        return maxElement;
+        return minElement;
     }
 }
