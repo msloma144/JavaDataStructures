@@ -3,36 +3,36 @@ package LinkedList;
 /**
  * Created by SlomaM on 5/31/2017.
  */
-public class LinkNode {
-    int data;
-    LinkNode link;
+class LinkNode<T> {
+    private LinkNode<T> link;
+    private T data;
 
     LinkNode(){
         this.link = null;
-        this.data = 0;
+        this.data = null;
     }
 
-    LinkNode(int data, LinkNode link){
+    LinkNode(LinkNode<T> link, T data){
         this.link = link;
         this.data = data;
     }
 
     //Setter methods
-    void setLink(LinkNode link){
+    void setLink(LinkNode<T> link){
         this.link = link;
     }
 
-    void setData(int data){
+    void setData(T data){
         this.data = data;
     }
 
     //Getter methods
 
-    LinkNode getLink(){
+    LinkNode<T> getLink(){
         return this.link;
     }
 
-    int getData(){
+    T getData(){
         return this.data;
     }
 }
