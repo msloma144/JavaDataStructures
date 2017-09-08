@@ -27,12 +27,18 @@ public class Testing {
 
 
         LinkedList<Integer> testing = new LinkedList<Integer>();
-        testing.insertAtStart(10);
-        testing.insertAtPos(20, 1);
-        testing.add(15);
-        testing.add(600);
-        testing.add(500);
-        testing.insertAtEnd(800);
+        testing.add(20);
+        testing.add(50);
+        testing.insertAtEnd(60);
+        testing.insertAtStart(700);
+        testing.search(60);
+        //testing.insertAtStart(10);
+        //testing.insertAtPos(20, 1);
+        //testing.add(15);
+        //testing.add(600);
+        //testing.add(500);
+        //testing.insertAtEnd(800);
+        //testing.insertAtPos(20, 8);
 
         //testing.
         testing.display();

@@ -41,7 +41,6 @@ public class LinkedList<T> {
             startNode = newNode;
             endNode = startNode;
         }
-
         else{
             endNode.setLink(newNode);
             endNode = newNode;
@@ -52,18 +51,27 @@ public class LinkedList<T> {
     //Insert a new node at position
     public void insertAtPos(T dataVal, int pos){
         LinkNode<T> newNode = new LinkNode<>(null, dataVal);
-        LinkNode<T> currentNode = this.startNode;
-         pos--;
-         for(int i = 0; i < size; i++){
-             if(i == pos){
-                 LinkNode<T> tmp =  currentNode.getLink();
-                 currentNode.setLink(newNode);
-                 newNode.setLink(tmp);
-                 break;
-             }
-             startNode = startNode.getLink();
-         }
-         size++;
+        if(startNode == null){
+            startNode = newNode;
+            endNode = startNode;
+        }
+        else if(pos == (size + 1)){
+            insertAtEnd(dataVal);
+        }
+        else {
+            LinkNode<T> currentNode = this.startNode;
+            pos--;
+            for (int i = 0; i < size; i++) {
+                if (i == pos) {
+                    LinkNode<T> tmp = currentNode.getLink();
+                    currentNode.setLink(newNode);
+                    newNode.setLink(tmp);
+                    break;
+                }
+                startNode = startNode.getLink();
+            }
+        }
+        size++;
     }
 
     public void add(T dataVal){
@@ -79,38 +87,54 @@ public class LinkedList<T> {
                 if (i == (size - 1)) {
                     LinkNode<T> tmp = currentNode.getLink();
                     currentNode.setLink(newNode);
-                    newNode.setLink(tmp);
+                    newNode.setLink(null);
+                    endNode = newNode;
                     break;
                 }
                 // change to next node
                 currentNode = currentNode.getLink();
             }
-            size++;
+        }
+        size++;
+    }
+
+    public void search(T item){
+        if (size == 0) {
+            System.out.println("Linked list is empty");
+        }
+        else {
+            boolean found = false;
+            LinkNode<T> ptr = startNode;
+
+            //loop through all nodes and look for item
+            while (ptr.getLink() != null){
+                if(ptr.getData().equals(item)) {System.out.println(item + " found!"); found = true; break; }
+                else{
+                    ptr = ptr.getLink();
+                }
+            }
+            // check end node for item
+            if(endNode.getData().equals(item)) {System.out.println(item + " found!"); found = true;}
+            if(!found) System.out.println(item + " not found!");
         }
     }
 
-    public void display()
-    {
+    public void display() {
         System.out.println("Singly Linked List: ");
-        if (size == 0)
-        {
+        if (size == 0) {
             System.out.println("empty");
-            return;
+        } else if (startNode.getLink() == null) {
+            System.out.println(startNode.getData());
+        } else {
+            LinkNode<T> ptr = startNode;
+            System.out.print(startNode.getData() + "->");
+            ptr = startNode.getLink();
+            while (ptr.getLink() != null) {
+                System.out.print(ptr.getData() + "->");
+                ptr = ptr.getLink();
+            }
+            System.out.print(ptr.getData() + "\n");
         }
-        if (startNode.getLink() == null)
-        {
-            System.out.println(startNode.getData() );
-            return;
-        }
-        LinkNode<T> ptr = startNode;
-        System.out.print(startNode.getData()+ "->");
-        ptr = startNode.getLink();
-        while (ptr.getLink() != null)
-        {
-            System.out.print(ptr.getData()+ "->");
-            ptr = ptr.getLink();
-        }
-        System.out.print(ptr.getData()+ "\n");
     }
 
     public int getSize(){
