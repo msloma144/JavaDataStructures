@@ -54,9 +54,11 @@ public class LinkedList<T> {
         if(startNode == null){
             startNode = newNode;
             endNode = startNode;
+            System.out.println("Entered at beginning");
         }
-        else if(pos == (size + 1)){
+        else if(pos >= (size)){
             insertAtEnd(dataVal);
+            System.out.println("Entered at the end of the list");
         }
         else {
             LinkNode<T> currentNode = this.startNode;
@@ -68,7 +70,7 @@ public class LinkedList<T> {
                     newNode.setLink(tmp);
                     break;
                 }
-                startNode = startNode.getLink();
+                currentNode = currentNode.getLink();
             }
         }
         size++;

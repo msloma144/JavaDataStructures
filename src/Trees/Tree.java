@@ -1,20 +1,19 @@
-package Heap;
+package Trees;
 
 import java.util.ArrayList;
 
 /**
- * Created by SlomaM on 5/17/2017.
+ * Created by Michael Sloma on 2/24/2017.
  */
-public class Heap {
+public class Tree {
+    ArrayList<Integer> tree;
 
-    ArrayList<Integer> heap_array;
-
-    public Heap(){
-        this.heap_array = new ArrayList<>();
+    public Tree(){
+        this.tree = new ArrayList<>();
     }
 
-    public Heap(ArrayList<Integer> input){
-        heap_array = input;
+    public Tree(ArrayList<Integer> input){
+        tree = input;
     }
 
     /*
@@ -39,15 +38,16 @@ public class Heap {
     }
 
     void add(int added){
-        heap_array.add(added);
+        tree.add(added);
     }
 
     int length(){
-        return heap_array.size();
+        return tree.size();
     }
 
     public String toString(){
-        System.out.println(heap_array);
+        System.out.println(tree);
         return null;
     }
 }
+

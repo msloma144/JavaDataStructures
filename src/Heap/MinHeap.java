@@ -7,12 +7,13 @@ import java.util.ArrayList;
  */
 public class MinHeap extends Heap{
 
-    MinHeap(int initialCapacity){
-        super(initialCapacity);
+    public MinHeap(){
+        super();
     }
 
-    MinHeap(ArrayList<Integer> input){
+    public MinHeap(ArrayList<Integer> input){
         super(input);
+        buildMinHeap();
     }
 
     //checks if an entry is a leaf, as if it is a leaf, it can present out of bounds error when processing
@@ -22,7 +23,7 @@ public class MinHeap extends Heap{
         return index >= (heap_array.size() / 2) && index <= heap_array.size();
     }
 
-    void minHeapify(int index){
+    public void minHeapify(int index){
         int leftChild = left(index);
         int rightChild = right(index);
         int smallest = 0;
@@ -51,36 +52,13 @@ public class MinHeap extends Heap{
         }
     }
 
-    void minHeapify(ArrayList<Integer> input_array, int index){
-        int leftChild = left(index);
-        int rightChild = right(index);
-        int smallest = 0;
-        //works only with ints right now
-        if(leftChild <= input_array.size() && input_array.get(leftChild) < input_array.get(index)){
-            smallest = leftChild;
-        }
-        else smallest = index;
-
-        if(rightChild <= input_array.size() && input_array.get(rightChild) < input_array.get(smallest)){
-            smallest = rightChild;
-        }
-
-        if(smallest != index){
-            int index_val = input_array.get(index);
-            input_array.set(index, input_array.get(smallest));
-            input_array.set(smallest, index_val);
-
-            minHeapify(smallest);
-        }
-    }
-
-    void buildMinHeap(){
+    private void buildMinHeap(){
         for(int i = (heap_array.size()/2); i >= 1; i--){
             minHeapify(i);
         }
     }
 
-    void add(int element){
+    public void add(int element){
         heap_array.add(element);
 
         //set currently looked at position to most recently added
@@ -99,7 +77,7 @@ public class MinHeap extends Heap{
         }
     }
 
-    int readMinElement(){
+    public int readMinElement(){
         //swap first and last elements then delete last element
         int minElement =  heap_array.get(0);
         heap_array.set(0, heap_array.get(heap_array.size() - 1));

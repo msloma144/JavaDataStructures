@@ -6,11 +6,11 @@ import java.util.ArrayList;
 public class Stack<T> {
     private ArrayList<T> stack;
 
-    Stack(){
+    public Stack(){
         this.stack = new ArrayList<>();
     }
 
-    T pop(){
+    public T pop(){
         //returns top element
         if(!isEmpty()){
             T temp = stack.get(stack.size()-1);
@@ -23,12 +23,12 @@ public class Stack<T> {
         }
     }
 
-    void push(T element){
+    public void push(T element){
         //Add element to the stack
         this.stack.add(element);
     }
 
-    T top(){
+    public T top(){
         //Returns the value on top of the stack
         T topOfStack = null;
 

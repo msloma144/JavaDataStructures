@@ -4,19 +4,22 @@ import java.util.ArrayList;
  * Created by Michael Sloma on 2/24/2017.
  */
 public class Queue<T> {
-    ArrayList<T> queue;
+    private ArrayList<T> queue;
 
-    Queue(){
-        this.queue = new ArrayList<>();    }
+    public Queue(){
+        this.queue = new ArrayList<>();
+    }
 
-    void enqueue(T element){
+    public void enqueue(T element){
         queue.add(element);
     }
 
-    T dequeue(){
+    public T dequeue(){
+        int endQueue = queue.size() - 1;
+
         if(!isEmpty()){
-            T temp = queue.get(0);
-            queue.remove(0);
+            T temp = queue.get(endQueue);
+            queue.remove(endQueue);
             return temp;
         }
         else {
