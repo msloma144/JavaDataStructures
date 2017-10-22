@@ -5,49 +5,66 @@ import java.util.ArrayList;
 /**
  * Created by Michael Sloma on 2/24/2017.
  */
-public class Tree {
-    ArrayList<Integer> tree;
+//WORK IN PROGRESS
+public class Tree<T> {
+    private TreeNode root;
+    private int size;
 
     public Tree(){
-        this.tree = new ArrayList<>();
+        this.root = null;
     }
 
-    public Tree(ArrayList<Integer> input){
-        tree = input;
+    public Tree(ArrayList<T> input){
+        this.root = new TreeNode<>(input.get(0));
+
+        for(int i = 1; i < input.size()/2; i++){
+            this.add(this.root, input.get(i));
+        }
     }
 
-    /*
-        Returns the index of the child to the left of the root at the given index
-     */
-    int left(int index){
-        return 2 * index + 1;
+    public void add(TreeNode<T> parent, T data){
+        /* If the tree is empty, return a new node */
+        TreeNode<T> thisNode = new TreeNode<>(data);
+
+        if (this.root == null) {
+            this.root = thisNode;
+        }
+        else {
+            parent.getChildren().add(thisNode);
+        }
     }
 
-    /*
-        Returns the index of the child to the right of the root at the given index
-    */
-    int right(int index){
-        return 2 * index + 2;
+    public void add(TreeNode<T> parent, ArrayList<TreeNode<T>> children, T data){
+        /* If the tree is empty, return a new node */
+        TreeNode<T> thisNode = new TreeNode<>(data, children);
+
+        if (this.root == null) {
+            this.root = thisNode;
+        }
+        else {
+            parent.getChildren().add(thisNode);
+        }
     }
 
-    /*
-        Returns the index of the parent of the child at the given index
-    */
-    int parent(int index) {
-        return index / 2;
+    void search(TreeNode<T> node){
+
     }
 
-    void add(int added){
-        tree.add(added);
+    public void DFS_pre_order(TreeNode<T> node){
+        if (node.getChildren().equals(null))
+            return;
+        //if(node.equals())
+        for (TreeNode<T> nextNode: node.getChildren()) {
+            DFS_pre_order(nextNode);
+        }
     }
 
-    int length(){
-        return tree.size();
+    public void DFS_in_order(){
+
     }
 
-    public String toString(){
-        System.out.println(tree);
-        return null;
+    public void DFS_post_order(){
+
     }
 }
 

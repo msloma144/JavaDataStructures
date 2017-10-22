@@ -7,6 +7,7 @@ import java.util.ArrayList;
  */
 public class BinarySearchTree extends Tree{
     private int separationValue;
+    private ArrayList<Integer> tree;
 
     BinarySearchTree(){
         super();
