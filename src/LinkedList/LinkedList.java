@@ -76,6 +76,25 @@ public class LinkedList<T> {
         size++;
     }
 
+    public T get(int index){
+        if (size == 0) {
+            System.out.println("Linked list is empty");
+        }
+        else if(index > size){
+            System.out.println("Index out of bounds!");
+        }
+        else {
+            LinkNode<T> ptr = startNode;
+
+            //loop through nodes till index is reached
+            for(int i = 0; i < index; i++){
+                ptr = ptr.getLink();
+            }
+            return ptr.getData();
+        }
+        return null;
+    }
+
     public void add(T dataVal){
         LinkNode<T> newNode = new LinkNode<T>(null, dataVal);
         if(startNode == null){
